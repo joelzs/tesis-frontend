@@ -180,6 +180,9 @@ function VisorPDF({ url, altura, fullscreen }) {
       const vp   = page.getViewport({ scale: escala });
       const cv   = document.createElement('canvas');
       cv.width = vp.width; cv.height = vp.height;
+      const ctx = cv.getContext('2d');
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, cv.width, cv.height);
       await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
       arr.push({ num:i, dataUrl:cv.toDataURL(), width:vp.width, height:vp.height });
     }
